@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.sogetiht.cordova_messenger"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.sogetiht.cordova_messenger"
         }
     },
     "dependent_plugins": {}

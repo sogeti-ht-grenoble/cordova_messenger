@@ -17,6 +17,7 @@
  * under the License.
  */
 var app = {
+    deviceId: "",
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -27,6 +28,9 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        //document.addEventListener('sendmessage', this.onSendMessage, false);
+        var button = document.getElementById('send-message').addEventListener('click', this.onSendMessage, false);
+        
     },
     // deviceready Event Handler
     //
@@ -35,15 +39,27 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
+    
+    onSendMessage:function(){
+        app.sendMessage('sendmessage');
+    },
+    
+    sendMessage: function(){        
+        var element = document.getElementById('message');
+        if(element.value.length > 0){
+            document.getElementById('display-message').innerHTML = "<b>"+app.deviceId+"</b>:  " + element.value;
+            document.getElementById('message').value = "";
+        } else {
+            document.getElementById('display-message').innerHTML = "<b>Please Type a Message</b>";
+            document.getElementById('message').value = "";
+        }
+        console.log('Send Message: ' + element.value);
+    },
+    
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+        app.deviceId = device.uuid;  
         console.log('Received Event: ' + id);
     }
 };
